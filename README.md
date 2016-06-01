@@ -3,7 +3,7 @@ Tagging analytic forms in the Russian National Corpus
 
 Description
 ----------
-A file analytic_tagging.py is a script tagging of russian analytic forms in texts from Russian National Corpus (http://www.ruscorpora.ru/index.html). 
+A file analytic_tagging.py is a script for tagging russian analytic forms in texts from Russian National Corpus (http://www.ruscorpora.ru/index.html). 
 The script is written in Python (version 3.5.1.). Used libraries: os, re.
 
 Insruction
