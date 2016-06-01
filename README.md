@@ -3,12 +3,12 @@ Tagging analytic forms in the Russian National Corpus
 
 Description
 ----------
-A file analytic_tagging.py contains a program that can be used for auotomatic tagging of russian analytic forms in texts from Russian National Corpus (http://www.ruscorpora.ru/index.html). 
-The code is written in Python (version 3.5.1.). Used libraries: os, re.
+A file analytic_tagging.py is a script tagging of russian analytic forms in texts from Russian National Corpus (http://www.ruscorpora.ru/index.html). 
+The script is written in Python (version 3.5.1.). Used libraries: os, re.
 
 Insruction
 ----------
-To use this program:
+To use this script:
 - Have a compatible version of Python installed
 - Download the analytic_tagging.py file
 - Run the file
@@ -17,7 +17,7 @@ To use this program:
 
 Texts format
 -----------
-Program works with xhtml files in windows-1251 encoding. Texts are disambiguated texts from Russian National Corpus with meta tagging and morphological tagging.
+Script works with xhtml files in windows-1251 encoding. Texts are disambiguated texts from Russian National Corpus with meta tagging and morphological tagging.
 Text fragment:
 ```
 ...
@@ -35,7 +35,7 @@ Text fragment:
 
 Output
 -----------
-Program creates new texts in wich tags are added.
+Script creates new texts in wich tags are added.
 List of tags:
 - fut_an (future compound forms of imperfective verbs)
 - comp_an (comparative compound forms)
