@@ -1,6 +1,8 @@
+#Tagging analytic forms in the Russian National Corpus
+
 import os, re
 
-def tag_fut(text): #будущее время глаголов несов. вида - тэг fut_an
+def tag_fut(text): #future compound forms of imperfective verbs - adding tag fut_an
     text2 = re.sub('(lex="быть" gr="[0-9A-Za-z=,\-]*?fut[0-9A-Za-z=,\-]*?"></ana>[^\s]+?</w>\s?\n\
 <w><ana lex=".+?" gr="V,ipf[0-9A-Za-z=,\-]*?inf[0-9A-Za-z=,\-]*?)("></ana>[^\s]+?</w>)', '\\1,fut_an\\2', text)
     if text2:
@@ -8,7 +10,7 @@ def tag_fut(text): #будущее время глаголов несов. ви�
     else:
         return(text)
 
-def tag_fut_2(text): #будущее время глаголов несов. вида (инфинитив на 1 месте) - тэг fut_an
+def tag_fut_2(text): #future compound forms of imperfective verbs - tag fut_an
     text2 = re.sub('(lex=".+?" gr="V,ipf[0-9A-Za-z=,\-]*?inf[0-9A-Za-z=,\-]*?)("></ana>[^\s]+?</w>\s?\n\
 <w><ana lex="быть" gr="[0-9A-Za-z=,\-]*?fut[0-9A-Za-z=,\-]*?"></ana>[^\s]+?</w>)', '\\1,fut_an\\2', text)
     if text2:
@@ -16,7 +18,7 @@ def tag_fut_2(text): #будущее время глаголов несов. в�
     else:
         return(text)
 
-def tag_fut_3(text): #будущее время глаголов несов. вида (инфинитив через 1 слово) - тэг fut_an
+def tag_fut_3(text): #future compound forms of imperfective verbs - tag fut_an
     text2 = re.sub('(lex="быть" gr="[0-9A-Za-z=,\-]*?fut[0-9A-Za-z=,\-]*?"></ana>[^\s]+?</w>\s?\n\
 <w>.+?</w>\s?\n\
 <w><ana lex=".+?" gr="V,ipf[0-9A-Za-z=,\-]*?inf[0-9A-Za-z=,\-]*?)("></ana>[^\s]+?</w>)', '\\1,fut_an\\2', text)
@@ -25,7 +27,7 @@ def tag_fut_3(text): #будущее время глаголов несов. в�
     else:
         return(text)
 
-def tag_fut_4(text): #будущее время глаголов несов. вида (два инфинитива с союзом) - тэг fut_an
+def tag_fut_4(text): #future compound forms of imperfective verbs - tag fut_an
     text2 = re.sub('(lex="быть" gr="[0-9A-Za-z=,\-]*?fut[0-9A-Za-z=,\-]*?"></ana>[^\s]+?</w>\s?\n\
 <w><ana lex=".+?" gr="V,ipf[0-9A-Za-z=,\-]*?inf[0-9A-Za-z=,\-]*?)("></ana>[^\s]+?</w>\s?\n\
 (?:(?:<w><ana lex="и" gr="CONJ"></ana>[^\s]+?</w>)|(?:<w><ana lex="или" gr="CONJ"></ana>[^\s]+?</w>))\s?\n\
@@ -35,7 +37,7 @@ def tag_fut_4(text): #будущее время глаголов несов. в�
     else:
         return(text)
 
-def tag_compar(text): #сравнительная степень прил/прич/нареч - тэг comp_an
+def tag_compar(text): #comparative compound forms - tag comp_an
     text2 = re.sub('(?<!<w><ana lex="то" gr="S-PRO,n,sg=ins"></ana>тем</w>\n\
 <w><ana lex="не" gr="PART"></ana>не</w>\n\
 )(<w><ana lex="(?:(?:более)|(?:менее))" gr="[0-9A-Za-z=,\-]*?"></ana>[^\s]+?</w>\s?\n\
@@ -45,7 +47,7 @@ def tag_compar(text): #сравнительная степень прил/при
     else:
         return(text)
 
-def tag_superl(text): #превосходная степень прил/прич/нареч - тэг supr_an
+def tag_superl(text): #superlative compound forms - tag supr_an
     text2 = re.sub('(lex="(?:(?:наиболее)|(?:наименее)|(?:самый))" gr="[0-9A-Za-z=,\-]*?"></ana>[^\s]+?</w>\s?\n\
 <w><ana lex=".+?" gr="(?:(?:A=)|(?:[0-9A-Za-z=,\-]*?partcp))[0-9A-Za-z=,\-]*?)("></ana>[^\s]+?</w>)', '\\1,supr_an\\2', text)
     text3 = re.sub('(lex="(?:(?:наиболее)|(?:наименее))" gr="[0-9A-Za-z=,\-]*?"></ana>[^\s]+?</w>\s?\n\
@@ -57,7 +59,7 @@ def tag_superl(text): #превосходная степень прил/прич
     else:
         return(text)
 
-def tag_subjunctive(text): #сослагательное наклонение (инфинитив/глагол прош.вр./предикатив + бы/б) - тэг subj_an
+def tag_subjunctive(text): #subjunctive mood compound forms - tag subj_an
     text2 = re.sub('(lex=".+?" gr="(?:(?:PRAEDIC)|(?:V[0-9A-Za-z=,\-]*?(?:(?:inf)|(?:praet))))[0-9A-Za-z=,\-]*?)("></ana>[^\s]+?</w>\s?\n\
 <w><ana lex="бы?" gr="[0-9A-Za-z=,\-]*?"></ana>[^\s]+?</w>)', '\\1,subj_an\\2', text)
     if text2:
@@ -65,7 +67,7 @@ def tag_subjunctive(text): #сослагательное наклонение (�
     else:
         return(text)
 
-def tag_subjunctive_2(text): #сослагательное наклонение (бы/б  + инфинитив/глагол прош.вр.) - тэг subj_an
+def tag_subjunctive_2(text): #subjunctive mood compound forms - tag subj_an
     text2 = re.sub('(?<!хотя)(?<!как)(?<!будто)(?<!словно)(?<!точно)(?<!вроде)(" gr="[0-9A-Za-z=,\-]*?"></ana>[^\s]+?</w>.*?\n\
 <w><ana lex="бы?" gr="[0-9A-Za-z=,\-]*?"></ana>[^\s]+?</w>\s?\n\
 <w><ana lex=".+?" gr="V[0-9A-Za-z=,\-]*?(?:(?:inf)|(?:praet))[0-9A-Za-z=,\-]*?)("></ana>[^\s]+?</w>)', '\\1,subj_an\\2', text)
@@ -74,7 +76,7 @@ def tag_subjunctive_2(text): #сослагательное наклонение 
     else:
         return(text)
 
-def tag_subjunctive_3(text): #сослагательное наклонение (чтобы/чтоб + инфинитив/глагол прош.вр.; или: чтобы/чтоб + любое слово + инфинитив/глагол прош.вр) - тэг subj_an
+def tag_subjunctive_3(text): #subjunctive mood compound forms - tag subj_an
     text2 = re.sub('(<w><ana lex="чтобы" gr="[0-9A-Za-z=,\-]*?"></ana>[^\s]+?</w>\s?\n\
 (?:<w>.+?</w>\s?\n\
 )?<w><ana lex=".+?" gr="V[0-9A-Za-z=,\-]*?(?:(?:inf)|(?:praet))[0-9A-Za-z=,\-]*?)("></ana>[^\s]+?</w>)', '\\1,subj_an\\2', text)
@@ -83,7 +85,7 @@ def tag_subjunctive_3(text): #сослагательное наклонение 
     else:
         return(text)
 
-def tag_passive(text): #страдательный залог - тэг pass_an
+def tag_passive(text): #passive voice compound forms - tag pass_an
     text2 = re.sub('(lex="быть" gr="[0-9A-Za-z=,\-]*?"></ana>[^\s]+?</w>\s?\n\
 <w><ana lex=".*?(?:(?:бегнуть)|(?:стигнуть)|(?:стынуть))" gr="V[0-9A-Za-z=,\-]*?)\
 ("></ana><ana lex="[а-яё]+?" gr="V[0-9A-Za-z=,\-]*?)("></ana>[^\s]+?</w>)', '\\1,pass_an\\2,pass_an\\3', text)
@@ -94,7 +96,7 @@ def tag_passive(text): #страдательный залог - тэг pass_an
     else:
         return(text)
 
-def tag_coop(text): #совместное действие - тэг coop_an
+def tag_coop(text): #imperative compound forms of cooperative action - tag coop_an
     text2 = re.sub('(lex="давай(?:те)?" gr="[0-9A-Za-z=,\-]*?"></ana>[^\s]+?</w>\s?\n\
 <w><ana lex=".+?" gr="V[0-9A-Za-z=,\-]*?(?:(?:imper)|(?:inf))[0-9A-Za-z=,\-]*?)("></ana>[^\s]+?</w>)', '\\1,coop_an\\2', text)
     if text2:
